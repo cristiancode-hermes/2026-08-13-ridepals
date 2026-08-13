@@ -57,6 +57,7 @@
 |---|----------|-------|-----|
 | 1 | **ALTA** | `TypeError: ride.datetime.slice is not a function` en search/detail/occurrences/dashboard: TypeORM hydrata columnas `datetime` como objeto `Date` (formato almacenado `YYYY-MM-DD HH:mm:ss.SSS`), pero el servicio asumía ISO string | Transformer en `Ride.datetime` entity: `from: Date → toISOString()` |
 | 2 | **MEDIA** | Solapamiento de viajes del conductor nunca detectaba viajes del MISMO día: `BETWEEN` comparaba `toISOString()` (`T…Z`) contra almacenado (`espacio`), mismatch lexicográfico | Pasar objetos `Date` como parámetros para que el driver serialice en el mismo formato |
+| 3 | **ALTA (seguridad)** | `passwordHash` expuesto en respuestas con relaciones anidadas (rides search/detail, bookings, messages con sender, users) — solo auth/users lo ocultaban manualmente | `@Exclude()` en `User.passwordHash` + `ClassSerializerInterceptor` global en main.ts. Verificado: 0 ocurrencias en search+profile |
 
 ### Minor Issues
 | Issue | Severity | Suggestion |

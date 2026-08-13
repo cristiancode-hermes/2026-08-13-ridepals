@@ -8,6 +8,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity('users')
 export class User {
@@ -20,6 +21,8 @@ export class User {
   @Column({ unique: true, length: 255 })
   email: string;
 
+  /** Nunca serializar: expuesto vía ClassSerializerInterceptor global. */
+  @Exclude()
   @Column()
   passwordHash: string;
 
