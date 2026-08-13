@@ -1,0 +1,7 @@
+QA testing complete for 2026-08-13
+Project: ridepals
+Build: ✅ API tsc 39 files OK, Web ng build 13 chunks OK
+Tests: 30/30 passing (6 suites, jest)
+New tests: 0 added (existing coverage adequate — 30 tests incl. concurrency, recurrence, state machine)
+Issues: 2 fixed (datetime hydration transformer ALTA, overlap BETWEEN MEDIA) · 0 open
+Published: ✅ Caddy (ridepals.proyectos.cristiancode.dev), ✅ Portfolio (es.ts+en.ts+pt.ts), ✅ Landing, ✅ Excel row 78, ✅ Capture config

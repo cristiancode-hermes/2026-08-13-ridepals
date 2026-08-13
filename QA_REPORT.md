@@ -78,17 +78,24 @@
 
 | Target | Result | Details |
 |--------|--------|---------|
-| GitHub repo | ✅ | `cristiancode-hermes/2026-08-13-ridepals` |
-| API | ✅ | Puerto 3058 (3047 ocupado por goal-compass) |
-| Caddy subdomain | ✅ | `ridepals.proyectos.cristiancode.dev` |
-| manage-apis.sh | ✅ | Registrado PORTS/NAMES/DIRS |
-| Landing page | ✅ | proyectos.cristiancode.dev categoría Social |
-| Portfolio locales | ✅ | es.ts + en.ts + pt.ts |
-| Excel tracker | ✅ | Fila añadida |
-| Capture config | ✅ | config.mjs + prod-capture.mjs |
+| GitHub repo | ✅ | `cristiancode-hermes/2026-08-13-ridepals` (2 commits: build + fixes) |
+| API | ✅ | Puerto 3058 (3047 ocupado por goal-compass — spec port squatting) |
+| Caddy subdomain | ✅ | `ridepals.proyectos.cristiancode.dev` — SPA 200, API login 200 |
+| manage-apis.sh | ✅ | Registrado PORTS/NAMES/DIRS index 47 — `status` ✅ HTTP 200 |
+| Landing page | ✅ | proyectos.cristiancode.dev categoría Social + stat 41→42, live verificado |
+| Portfolio locales | ✅ | es.ts + en.ts + pt.ts (id 176), theme Open Road registrado en themes.ts |
+| Screenshots | ✅ | ridepals.png (67KB) + ridepals-m.png (52KB) — dashboard real verificado por vision |
+| Excel tracker | ✅ | Fila 78 (RidePals, port 3058) |
+| Capture config | ✅ | config.mjs + prod-capture.mjs (slug + rp_token en ambos bloques) |
+
+**Verificación de enlaces (todas HTTP 200):**
+- `https://ridepals.proyectos.cristiancode.dev` → 200
+- `https://github.com/cristiancode-hermes/2026-08-13-ridepals/blob/main/README.md` → 200
+- `https://github.com/cristiancode-hermes/2026-08-13-ridepals` → 200
+- Detalle portafolio es/en/pt → 200 · grilla /hermes → 1 hit · assets → 200
 
 ## Summary
 
 **OVERALL: PASS ✅**
 
-2 bugs corregidos (datetime hydration + overlap BETWEEN), 30 tests verdes, 26 checks de endpoints verdes, deploy completo verificado.
+2 bugs corregidos (datetime hydration + overlap BETWEEN), 30 tests verdes, 26 checks de endpoints verdes, deploy completo verificado (Caddy + manage-apis + landing + portafolio 3 locales + Excel + capture config + screenshots). QA data limpiada de la BD (solo seed demo/lucia/marc).
