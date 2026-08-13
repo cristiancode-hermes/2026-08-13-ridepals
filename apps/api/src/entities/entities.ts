@@ -109,7 +109,13 @@ export class Ride {
   destLng: number;
 
   /** Fecha base: puntual = fecha real; recurrente = primera ocurrencia. ISO string. */
-  @Column({ type: 'datetime' })
+  @Column({
+    type: 'datetime',
+    transformer: {
+      to: (v: string) => v,
+      from: (v: Date | string) => (v instanceof Date ? v.toISOString() : v),
+    },
+  })
   datetime: string;
 
   @Column({ type: 'smallint' })

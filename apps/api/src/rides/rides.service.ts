@@ -154,8 +154,11 @@ export class RidesService {
       .where('r.driverId = :driverId', { driverId: userId })
       .andWhere("r.status = 'active'")
       .andWhere('r.datetime BETWEEN :from AND :to', {
-        from: new Date(datetime.getTime() - OVERLAP_MINUTES * 60_000).toISOString(),
-        to: new Date(datetime.getTime() + OVERLAP_MINUTES * 60_000).toISOString(),
+        // Date objects: el driver better-sqlite3 los serializa al mismo formato
+        // que los valores almacenados ("YYYY-MM-DD HH:mm:ss.SSS"); comparar con
+        // toISOString() ("T…Z") nunca coincide con lo guardado.
+        from: new Date(datetime.getTime() - OVERLAP_MINUTES * 60_000),
+        to: new Date(datetime.getTime() + OVERLAP_MINUTES * 60_000),
       })
       .getCount();
     if (overlap > 0) {
