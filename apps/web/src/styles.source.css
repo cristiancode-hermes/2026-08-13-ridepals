@@ -1,0 +1,230 @@
+/* ============================================================
+   RIDEPALS — Design System "Open Road"
+   Señalética vial europea + conducción nocturna. Superficies
+   separadas por bordes 1px (filosofía PostHog), acento naranja
+   cono de obra que flashea en hover, un único shadow dramático
+   reservado a modales. Prohibido: gradientes púrpura, glass,
+   side-stripe borders, hero-metrics.
+   ============================================================ */
+
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #F7F7F4;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #EEF0EC;
+  --color-border: #D8DCD4;
+  --color-ink: #1C2430;
+  --color-ink-muted: #5A6472;
+  --color-ink-faint: #8A93A0;
+  --color-primary: #0E7A4B;
+  --color-primary-hover: #0B5F3A;
+  --color-primary-soft: #E3F2EA;
+  --color-accent: #EA580C;
+  --color-accent-hover: #C2410C;
+  --color-accent-soft: #FDEDE3;
+  --color-secondary: #334155;
+  --color-success: #15803D;
+  --color-warning: #B45309;
+  --color-danger: #B91C1C;
+  --color-info: #0369A1;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Dark: swap de tokens por variable (asfalto nocturno / luz de cruce) */
+.dark {
+  --color-bg: #0F1216;
+  --color-surface: #171C22;
+  --color-surface-muted: #1E242C;
+  --color-border: #2A323C;
+  --color-ink: #E8ECF1;
+  --color-ink-muted: #98A2B0;
+  --color-ink-faint: #6B7482;
+  --color-primary: #2EA36A;
+  --color-primary-hover: #3FB57C;
+  --color-primary-soft: #12352A;
+  --color-accent: #FB7A3D;
+  --color-accent-hover: #FF9A66;
+  --color-accent-soft: #3A2017;
+  --color-secondary: #B6C0CE;
+  --color-success: #34D399;
+  --color-warning: #FBBF24;
+  --color-danger: #F87171;
+  --color-info: #38BDF8;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    line-height: 1.55;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+    max-width: 70ch;
+  }
+  ::selection {
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary);
+  }
+}
+
+@layer components {
+  /* Hover flash: la firma del sistema — el accent flashea al pasar el cursor */
+  .flash-accent {
+    transition: color 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .group:hover .flash-accent,
+  .flash-accent:hover {
+    color: var(--color-accent);
+  }
+  .ride-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 16px;
+    transition: border-color 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ride-card:hover {
+    border-color: var(--color-accent-hover);
+  }
+  .input-base {
+    width: 100%;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    height: 44px;
+    padding: 0 12px;
+    font-size: 15px;
+    color: var(--color-ink);
+    transition: border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms;
+  }
+  .input-base:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 24px;
+    border-radius: 8px;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms;
+  }
+  .btn-primary:hover { background-color: var(--color-primary-hover); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 24px;
+    border-radius: 8px;
+    background-color: var(--color-accent);
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms;
+  }
+  .btn-accent:hover { background-color: var(--color-accent-hover); }
+  .btn-accent:active { transform: scale(0.98); }
+  .btn-accent:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background-color: transparent;
+    color: var(--color-ink-muted);
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 150ms cubic-bezier(0.16, 1, 0.3, 1), border-color 150ms;
+  }
+  .btn-ghost:hover {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
+  }
+  .label-base {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    color: var(--color-ink);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+  .badge-pending { background-color: color-mix(in srgb, var(--color-warning) 12%, transparent); color: var(--color-warning); }
+  .badge-confirmed { background-color: var(--color-primary-soft); color: var(--color-primary); }
+  .badge-completed { background-color: var(--color-surface-muted); color: var(--color-ink-muted); }
+  .badge-cancelled { background-color: color-mix(in srgb, var(--color-danger) 10%, transparent); color: var(--color-danger); }
+  .badge-rejected { background-color: color-mix(in srgb, var(--color-danger) 10%, transparent); color: var(--color-danger); }
+  .card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+  .toast-base {
+    background-color: var(--color-ink);
+    color: var(--color-bg);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    box-shadow: 0 25px 50px -12px rgba(15, 18, 22, 0.35);
+  }
+  .animate-scale-in {
+    animation: rp-scale-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .animate-toast-in {
+    animation: rp-toast-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@keyframes rp-scale-in {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes rp-toast-in {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flash-accent, .ride-card, .btn-primary, .btn-accent, .btn-ghost, .input-base {
+    transition: none;
+  }
+  .animate-scale-in, .animate-toast-in {
+    animation: none;
+  }
+}
