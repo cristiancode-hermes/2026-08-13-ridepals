@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
@@ -58,7 +58,7 @@ import { apiError } from '../../utils/errors';
     </div>
   `,
 })
-export class MessagesPageComponent {
+export class MessagesPageComponent implements OnInit {
   readonly rideId = input.required<string>();
 
   private readonly http = inject(HttpClient);
@@ -70,7 +70,7 @@ export class MessagesPageComponent {
   readonly sending = signal(false);
   readonly draft = signal('');
 
-  constructor() {
+  ngOnInit(): void {
     void this.load();
   }
 

@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -169,7 +169,7 @@ import { apiError } from '../../utils/errors';
     }
   `,
 })
-export class RideDetailPageComponent {
+export class RideDetailPageComponent implements OnInit {
   readonly id = input.required<string>();
 
   private readonly http = inject(HttpClient);
@@ -188,7 +188,7 @@ export class RideDetailPageComponent {
 
   readonly isMine = () => this.ride()?.driverId === this.auth.user()?.id;
 
-  constructor() {
+  ngOnInit(): void {
     void this.load();
   }
 

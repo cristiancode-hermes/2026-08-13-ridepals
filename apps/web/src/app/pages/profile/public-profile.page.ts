@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
@@ -72,7 +72,7 @@ import { apiError } from '../../utils/errors';
     }
   `,
 })
-export class PublicProfilePageComponent {
+export class PublicProfilePageComponent implements OnInit {
   readonly id = input.required<string>();
 
   private readonly http = inject(HttpClient);
@@ -85,7 +85,7 @@ export class PublicProfilePageComponent {
 
   readonly isSelf = () => this.selfId() === this.user()?.id;
 
-  constructor() {
+  ngOnInit(): void {
     const token = localStorage.getItem('rp_token');
     try {
       if (token) {
